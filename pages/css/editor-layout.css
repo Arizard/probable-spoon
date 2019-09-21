@@ -1,0 +1,15 @@
+.editor-sidebar-container {
+    position: fixed;
+    width: 196px;
+    height: 100vh;
+    top: 0px;
+    background: #fff;
+    border-right: 1px solid lightgrey;
+    box-shadow: 1px 0px 3px 0px lightgrey;
+}
+
+.editor-panel-container {
+    margin-left: 196px;
+    padding: 8px;
+    height: 2000px;
+}
