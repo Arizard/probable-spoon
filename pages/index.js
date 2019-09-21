@@ -2,7 +2,7 @@ import React from "react";
 import EditorSidebar from "../components/editorsidebar";
 import EditorPanel from "../components/editorpanel";
 import "bulma";
-import "./css/editor-layout.css";
+import "./css/editor-layout.scss";
 
 const Index = () => (
   <div>
