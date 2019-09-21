@@ -1,7 +1,6 @@
 import LoginInfo from "../components/logininfo";
 import DocumentList from "../components/documentlist";
 import ScriptingChecklist from "../components/scriptingchecklist";
-import { GoChevronLeft } from "react-icons/go";
 
 const EditorSidebar = props => (
   <div className="editor-sidebar">
@@ -9,12 +8,11 @@ const EditorSidebar = props => (
       username={props.username}
       logoutURL={props.logoutURL}
       />
-    <DocumentList></DocumentList>
+    <DocumentList
+      userDocuments={props.userDocuments}
+      />
     <ScriptingChecklist></ScriptingChecklist>
     {/* Collapsible, so we add a Button */}
-    <button className="button is-light">
-      <GoChevronLeft />
-    </button>
   </div>
 );
 
