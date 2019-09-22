@@ -8,6 +8,15 @@ $wide-margin: 12px;
     box-shadow: 0px 0px 6px 0px $light;
 }
 
+@media (max-width: 960px) {
+    .editor-sidebar-container {
+        display: none;
+    }
+    .editor-panel-container {
+        margin: $wide-margin !important;
+    }
+}
+
 .editor-sidebar-container {
     position: fixed;
     width: $sidebar-width;

@@ -19,6 +19,21 @@ const editor = new EditorJS({
       class: Header,
       inlineToolbar: ["link"]
     }
+  },
+
+
+
+  data: {
+    blocks: [
+      {
+        type: "header",
+        data: {text: "Heading", level: 2}
+      },
+      {
+        type: "paragraph",
+        data: {text: "Paragraph. Could be a <b>Focus</b> or <b>Objective</b>."}
+      },
+    ]
   }
 });
 export default editor

@@ -1,7 +1,7 @@
 import React from "react";
 import EditorSidebar from "../components/editorsidebar";
 import EditorPanel from "../components/editorpanel";
-import "bulma";
+import "./css/bulma-wrapper.scss";
 import "./css/editor-layout.scss";
 
 const userDocuments = [
