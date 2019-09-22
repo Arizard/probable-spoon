@@ -13,6 +13,8 @@
     "babel": "^6.23.0",
     "bulma": "^0.7.5",
     "draft-js": "^0.10.5",
+    "firebase": "^6.6.2",
+    "firebaseui": "^4.2.0",
     "next": "^9.0.6",
     "next-sass": "^1.0.3",
     "nextjs": "^0.0.3",
@@ -22,6 +24,7 @@
     "react-bulma-components": "^2.3.0",
     "react-dom": "^16.9.0",
     "react-dom-server": "0.0.5",
+    "react-firebaseui": "^4.0.0",
     "react-icons": "^3.7.0",
     "react-no-ssr": "^1.1.0"
   },

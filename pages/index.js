@@ -1,46 +1,88 @@
-import React from "react";
-import EditorSidebar from "../components/editorsidebar";
-import EditorPanel from "../components/editorpanel";
-import "./css/bulma-wrapper.scss";
-import "./css/editor-layout.scss";
+import React, { Component } from 'react';
+import EditorSidebar from '../components/editorsidebar';
+import EditorPanel from '../components/editorpanel';
+import Api from '../components/docPersistence';
+import Router from "next/router"
+import './css/bulma-wrapper.scss';
+import './css/editor-layout.scss';
 
 const userDocuments = [
-  { 
-    name: "Document01",
-    title: "Document01",
-    owner: "Arie",
-    data: "(omitted by presenter)",
-    uuid: "fake-uuid-fake-uuid",
-  },
-  { 
-    name: "Document02",
-    title: "Document02",
-    owner: "Arie",
-    data: "(omitted by presenter)",
-    uuid: "fake-uuid-fake-uuid",
-  },
-  { 
-    name: "Document03",
-    title: "Document03",
-    owner: "Arie",
-    data: "(omitted by presenter)",
-    uuid: "fake-uuid-fake-uuid",
-  },
-]
+	{
+		name: 'Document01',
+		title: 'Document01',
+		owner: 'Arie',
+		data: '(omitted by presenter)',
+		uuid: 'fake-uuid-fake-uuid'
+	},
+	{
+		name: 'Document02',
+		title: 'Document02',
+		owner: 'Arie',
+		data: '(omitted by presenter)',
+		uuid: 'fake-uuid-fake-uuid'
+	},
+	{
+		name: 'Document03',
+		title: 'Document03',
+		owner: 'Arie',
+		data: '(omitted by presenter)',
+		uuid: 'fake-uuid-fake-uuid'
+	}
+];
 
-const Index = () => (
-  <div>
-    <div className="editor-sidebar-container">
-      <EditorSidebar
-        username="ArieUser"
-        logoutURL="/logout"
-        userDocuments={userDocuments}
-        />
-    </div>
-    <div className="editor-panel-container">
-      <EditorPanel></EditorPanel>
-    </div>
-  </div>
-);
+class Index extends Component {
+	state = { userDocuments: []};
+
+	componentDidMount() {
+		var firebase = require('../components/firebaseInit').default;
+		this.setState({ firebase });
+		firebase.auth().onAuthStateChanged(user => {
+			if (user) {
+				user.getIdToken(/* forceRefresh */ true)
+					.then(idToken => {
+						const api = new Api(idToken);
+						this.setState({
+							token: idToken,
+							api: api
+						});
+					})
+					.catch(function(error) {
+						console.error('Could not get the ID Token.');
+						console.error(error);
+					});
+				this.setState({ user: user, authed: true });
+			} else {
+        // User is signed out.
+        Router.push("/login")
+				this.setState({ user: null, authed: false });
+			}
+		});
+	}
+
+	render() {
+		if (this.state.authed && this.state.api) {
+      this.state.api.getDocumentList().then(json => (this.setState({userDocuments: json})))
+			// const userDocumentsRemote = Api().getDocumentList()
+			return (
+				<div>
+					<div className="editor-sidebar-container">
+						<EditorSidebar
+							username={this.state.user.displayName}
+							token={this.state.token}
+							logoutCallback={() =>
+								this.state.firebase.auth().signOut()
+							}
+							userDocuments={this.state.userDocuments}
+						/>
+					</div>
+					<div className="editor-panel-container">
+						<EditorPanel token={this.state.token}></EditorPanel>
+					</div>
+				</div>
+			);
+		}
+		return <div></div>;
+	}
+}
 
 export default Index;

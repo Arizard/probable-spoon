@@ -6,7 +6,7 @@ const EditorSidebar = props => (
   <div className="editor-sidebar">
     <LoginInfo 
       username={props.username}
-      logoutURL={props.logoutURL}
+      logoutCallback={props.logoutCallback}
       />
     <DocumentList
       userDocuments={props.userDocuments}

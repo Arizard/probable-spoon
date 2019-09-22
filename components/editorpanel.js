@@ -40,7 +40,7 @@ export default class EditorPanel extends Component {
     if (this.state.browser) {
       return (
         <div className="reset-bulma">
-          <button className='button is-primary is-outline is-rounded is-small' onClick={this.onClickSave}>[Debug] Get Output</button>
+          {/* <button className='button is-primary is-outline is-rounded is-small' onClick={this.onClickSave}>[Debug] Get Output</button> */}
           <div id="editor-area"></div>
         </div>
       );

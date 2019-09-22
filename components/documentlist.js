@@ -6,9 +6,9 @@ const DocumentList = props => {
 		<li key={row.name}>
             <div>
                 <a>
-                    <span className="icon">
+                    {/* <span className="icon">
                         <GoFile />
-                    </span>
+                    </span> */}
                     {row.title}
                 </a>
             </div>
@@ -16,11 +16,11 @@ const DocumentList = props => {
 	));
 
 	return (
-		<div className="document-list box">
+		<div className="document-list box menu">
             <p>
-                <span className="has-text-weight-bold">Documents</span>
+                <span className="menu-label">Documents</span>
             </p>
-            <ul className="has-text-grey">
+            <ul className="menu-list">
                 {componentUserDocuments}
             </ul>
 		</div>
