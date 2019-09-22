@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const DocumentList = props => {
 	const componentUserDocuments = props.userDocuments.map(row => (
-		<li>
+		<li key={row.name}>
             <div>
                 <a>
                     <span className="icon">
@@ -19,10 +19,10 @@ const DocumentList = props => {
 		<div className="document-list box">
             <p>
                 <span className="has-text-weight-bold">Documents</span>
+            </p>
             <ul className="has-text-grey">
                 {componentUserDocuments}
             </ul>
-            </p>
 		</div>
 	);
 };

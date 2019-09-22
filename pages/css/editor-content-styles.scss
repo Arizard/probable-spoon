@@ -1,0 +1,7 @@
+@import "../../node_modules/bulma/bulma.sass";
+
+.ce-block {
+    h2 {
+        @extend .is-size-2;
+    }
+}
