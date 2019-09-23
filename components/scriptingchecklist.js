@@ -1,6 +1,6 @@
 const ScriptingChecklist = () => (
     <div className="scripting-checklist box">
-        <p>ScriptingChecklist</p>
+        <span className="menu-label">Checklist</span>
     </div>
 )
 

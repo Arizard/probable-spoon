@@ -17,9 +17,7 @@ const DocumentList = props => {
 
 	return (
 		<div className="document-list box menu">
-            <p>
-                <span className="menu-label">Documents</span>
-            </p>
+            <span className="menu-label">Documents</span>
             <ul className="menu-list">
                 {componentUserDocuments}
             </ul>

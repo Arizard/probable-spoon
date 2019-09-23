@@ -1,3 +1,5 @@
+const dev = true
+
 class Api {
 	constructor(token) {
 		this.token = token;
@@ -46,5 +48,6 @@ class Api {
 		return request();
 	};
 }
+
 
 export default Api;
