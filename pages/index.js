@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import EditorSidebar from '../components/editorsidebar';
 import EditorPanel from '../components/editorpanel';
 import Api from '../components/docPersistence';
-import Router from "next/router"
+import Router from 'next/router';
 import './css/bulma-wrapper.scss';
 import './css/editor-layout.scss';
 
@@ -31,7 +31,22 @@ const userDocuments = [
 ];
 
 class Index extends Component {
-	state = { userDocuments: []};
+	state = {
+		userDocumentsRetrieved: false,
+		userDocuments: [],
+		currentDocument: {},
+	};
+
+	openDocument = (_uuid) => {
+		this.state.api.getDocument(_uuid).then(obj => {
+			this.setState({ currentDocument: obj })
+		})
+	}
+
+	shouldComponentUpdate = () => {
+		console.log("component updated")
+		return true
+	}
 
 	componentDidMount() {
 		var firebase = require('../components/firebaseInit').default;
@@ -52,17 +67,25 @@ class Index extends Component {
 					});
 				this.setState({ user: user, authed: true });
 			} else {
-        // User is signed out.
-        Router.push("/login")
+				// User is signed out.
+				Router.push('/login');
 				this.setState({ user: null, authed: false });
 			}
 		});
 	}
 
-	render() {
+	render = () => {
 		if (this.state.authed && this.state.api) {
-      this.state.api.getDocumentList().then(json => (this.setState({userDocuments: json})))
-			// const userDocumentsRemote = Api().getDocumentList()
+			if (!this.state.userDocumentsRetrieved) {
+				this.state.api.getDocumentList().then(json => {
+					console.log(json);
+					this.setState({
+						userDocumentsRetrieved: true,
+						userDocuments: json
+					});
+				});
+			}
+			console.log(this.state.currentDocument)
 			return (
 				<div>
 					<div className="editor-sidebar-container">
@@ -73,10 +96,14 @@ class Index extends Component {
 								this.state.firebase.auth().signOut()
 							}
 							userDocuments={this.state.userDocuments}
+							openDocument={this.openDocument}
 						/>
 					</div>
 					<div className="editor-panel-container">
-						<EditorPanel token={this.state.token}></EditorPanel>
+						<EditorPanel
+							token={this.state.token}
+							currentDocument={this.state.currentDocument}
+						/>
 					</div>
 				</div>
 			);

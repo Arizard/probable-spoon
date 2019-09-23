@@ -8,6 +8,15 @@ export default class EditorPanel extends Component {
     editor: null
   };
 
+  constructor(props) {
+    super(props)
+  }
+
+  shouldComponentUpdate = () => {
+    console.log(this.props)
+    return true
+  }
+
   componentDidMount = () => {
     /*
         I have to load the editor ONLY on the client using componentDidMount.
@@ -18,7 +27,12 @@ export default class EditorPanel extends Component {
       browser: true,
     });
     import("./editorjsnossr").then((module) => {
-      this.setState({ editor: module.default })
+      this.setState({
+        editor: module.default(
+          () => {},
+          this.props.currentDocument.data
+        ) 
+      })
     })
   };
 
@@ -31,7 +45,7 @@ export default class EditorPanel extends Component {
     })
   }
 
-  render() {
+  render = () => {
     /*
         I only want this to work in the client browser.
         It will fail with SSR - it's UGC and private to each user so it doesn't
@@ -40,7 +54,6 @@ export default class EditorPanel extends Component {
     if (this.state.browser) {
       return (
         <div className="reset-bulma">
-          {/* <button className='button is-primary is-outline is-rounded is-small' onClick={this.onClickSave}>[Debug] Get Output</button> */}
           <div id="editor-area"></div>
         </div>
       );

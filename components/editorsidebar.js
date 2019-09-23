@@ -10,6 +10,7 @@ const EditorSidebar = props => (
       />
     <DocumentList
       userDocuments={props.userDocuments}
+      openDocument={props.openDocument}
       />
     <ScriptingChecklist></ScriptingChecklist>
     {/* Collapsible, so we add a Button */}

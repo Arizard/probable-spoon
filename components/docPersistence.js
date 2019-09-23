@@ -47,6 +47,31 @@ class Api {
 
 		return request();
 	};
+
+	getDocument = (_uuid) => {
+		const request = async () => {
+			const obj = {
+				method: 'GET',
+				mode: 'cors',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					Host: this.endpoints.root,
+					Origin: 'http://localhost:3000',
+					Authorization: `Bearer ${this.token}`,
+					'Cache-Control': 'no-cache'
+				},
+			};
+
+			console.log(obj);
+            const response = await fetch(this.getDocumentURL(_uuid), obj);
+			const json = await response.json();
+			json.data = JSON.parse(json.data)
+			return json;
+		};
+
+		return request();
+	}
 }
 
 
