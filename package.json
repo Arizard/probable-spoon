@@ -18,7 +18,7 @@
     "next": "^9.0.6",
     "next-sass": "^1.0.3",
     "nextjs": "^0.0.3",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "octicons-react": "^0.18.9",
     "react": "^16.9.0",
     "react-bulma-components": "^2.3.0",
